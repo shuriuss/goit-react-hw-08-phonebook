@@ -7,42 +7,52 @@ import { useEffect } from 'react';
 import { deleteContact, fetchContacts } from 'redux/operations';
 import { getContacts, getFilter } from 'redux/selectors';
 
-import { RotatingLines } from  'react-loader-spinner'
-
+import { RotatingLines } from 'react-loader-spinner';
+import UserMenu from 'components/UserMenu';
+import { selectIsLoggedIn, selectToken } from 'redux/auth/authSelectors';
 
 function ContactList() {
+  let currentContacts = '';
   const dispatch = useDispatch();
+
   // Получаем части состояния
   const { contacts, isLoading, error } = useSelector(getContacts);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const token = useSelector(selectToken)
+
+
   // Вызываем операцию
   useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
+    token && dispatch(fetchContacts());
+  }, [ dispatch, token]);
+
   // Удаление контакта
   const handleDelete = id => {
+    console.log(id);
+    // currentContacts.filter(contact=> contact.includes(id))
     return dispatch(deleteContact(id));
   };
+
   // фильтрация по имени
   const filter = useSelector(getFilter);
-  
-  const currentContacts = contacts.filter(contact =>
+
+  currentContacts = contacts.filter(contact =>
     contact.name.toLowerCase().includes(filter)
   );
-  
+
   return (
     <>
-  
-      {isLoading && <RotatingLines/>}
+      {isLoading && <RotatingLines />}
       {error && <b>{error}</b>}
-      {currentContacts.length === 0 ? (
+      {(currentContacts.length === 0 || !isLoggedIn)? (
         <p>No contact</p>
       ) : (
         <>
           <ul className={s.contact__list}>
-            {currentContacts.map(({ id, name, phone }) => (
+            {currentContacts.map(({ id, name, number }) => (
               <li key={id} className={s.contact__item}>
                 <p>
-                  {name}: {phone}
+                  {name}: {number}
                 </p>
                 <button
                   type="button"
@@ -61,18 +71,15 @@ function ContactList() {
 }
 
 ContactList.propTypes = {
-    handleDelete: PropTypes.func,
-    contacts: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired,
-        number: PropTypes.string.isRequired,
-      }).isRequired
-    ),
-  };
-
-
-
+  handleDelete: PropTypes.func,
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    }).isRequired
+  ),
+};
 
 export default ContactList;
 

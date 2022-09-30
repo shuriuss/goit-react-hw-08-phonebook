@@ -4,10 +4,11 @@ import s from './Form.module.css';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { getContacts } from 'redux/selectors';
-import { addContact } from 'redux/operations';
+import { addContact, fetchContacts } from 'redux/operations';
+import UserMenu from 'components/UserMenu';
 
 function Form() {
-  const {contacts} = useSelector(getContacts);
+  const { contacts } = useSelector(getContacts);
 
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
@@ -35,19 +36,18 @@ function Form() {
   const handleSubmit = e => {
     e.preventDefault();
     const name = e.target.elements.name.value;
-    const phone = e.target.elements.number.value;
-    const newContact = { name, phone };
-    
+    const number = e.target.elements.number.value;
+    const newContact = { name, number };
 
     if (name.length === 0) {
       return;
     }
-    if (phone.length === 0) {
+    if (number.length === 0) {
       return;
     }
 
-    const inputContact =  contacts.some(el => el.name === name);
-    
+    const inputContact = contacts.some(el => el.name === name);
+
     if (inputContact) {
       alert(` ${name} is already in contacts`);
       return;
@@ -60,6 +60,7 @@ function Form() {
 
   return (
     <>
+      <UserMenu />
       <h2 className={s.title}>Name</h2>
       <form onSubmit={handleSubmit} className={s.form}>
         <input

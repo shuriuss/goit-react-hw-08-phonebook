@@ -15,7 +15,7 @@ export function App() {
       <div>
         <Routes>
           <Route path="/" element={<Register/>} />
-          <Route index element={<Register/>} />
+          {/* <Route index element={<Register/>} /> */}
           <Route path="login" element={<Login/>} />
           <Route path="contacts" element={<Contacts/>} />
         </Routes>

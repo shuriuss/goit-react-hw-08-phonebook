@@ -6,15 +6,13 @@ axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 // Создание JWT
 const setAuthHeader = token => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-  console.log(axios.defaults.headers.common.Authorization);
+
 };
 
 // Удаление JWT
 const clearAuthHeader = token => {
   axios.defaults.headers.common.Authorization = '';
-  console.log(token);
   token=''
-  console.log(token);
 
 };
 
@@ -60,6 +58,7 @@ export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
     await axios.post('/users/logout');
     clearAuthHeader();
+    
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }

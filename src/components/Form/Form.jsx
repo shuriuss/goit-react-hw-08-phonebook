@@ -4,8 +4,9 @@ import s from './Form.module.css';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { getContacts } from 'redux/selectors';
-import { addContact, fetchContacts } from 'redux/operations';
+import { addContact } from 'redux/operations';
 import UserMenu from 'components/UserMenu';
+// import { selectIsLoggedIn } from 'redux/auth/authSelectors';
 
 function Form() {
   const { contacts } = useSelector(getContacts);
@@ -14,6 +15,7 @@ function Form() {
   const [number, setNumber] = useState('');
 
   const dispatch = useDispatch();
+  // const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const handleChange = e => {
     const { name } = e.currentTarget;

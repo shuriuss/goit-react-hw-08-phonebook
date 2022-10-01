@@ -19,6 +19,7 @@ function ContactList() {
   const { contacts, isLoading, error } = useSelector(getContacts);
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const token = useSelector(selectToken)
+  const filter = useSelector(getFilter);
 
 
   // Вызываем операцию
@@ -29,12 +30,12 @@ function ContactList() {
   // Удаление контакта
   const handleDelete = id => {
     console.log(id);
-    // currentContacts.filter(contact=> contact.includes(id))
-    return dispatch(deleteContact(id));
-  };
+    return (
+      dispatch(deleteContact(id))
+    )
+    };
 
   // фильтрация по имени
-  const filter = useSelector(getFilter);
 
   currentContacts = contacts.filter(contact =>
     contact.name.toLowerCase().includes(filter)

@@ -51,7 +51,7 @@ const contactsSlice = createSlice({
       // contact => contact.id === action.payload
       // );
       // state.contacts.splice(index, 1);
-      state.contacts= state.contacts.filter(contact => contact.id !== action.payload.id)
+      state.contacts= state.contacts.filter(contact => contact.id !== action.payload)
     },
     [deleteContact.rejected](state, action) {
       state.isLoading = false;
@@ -59,37 +59,8 @@ const contactsSlice = createSlice({
     },
   },
 
-  // reducers: {
-  //   //Добавление контакта
-  //   addContact: {
-  //     reducer(state, action) {
-  //       state.push(action.payload);
-  //     },
-  //     prepare(name, number) {
-  //       return {
-  //         payload: {
-  //           id: Date.now(),
-  //           name,
-  //           number,
-  //         },
-  //       };
-  //     },
-  //   },
 
-  //   //Удаление контакта
-  //   deleteContact(state, action) {
-  //     const index = state.findIndex(contact => contact.id === action.payload);
-  //     state.splice(index, 1);
-  //   },
-  // },
 });
 
-// export const {
 
-//   deleteContact,
-//   fetchingInProgress,
-//   fetchingSuccess,
-//   fetchingError,
-
-// } = contactsSlice.actions;
 export const contactReducer = contactsSlice.reducer;

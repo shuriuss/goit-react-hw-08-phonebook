@@ -1,14 +1,14 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { logIn } from 'redux/auth/authOperation';
-import { selectIsLoggedIn, selectToken } from 'redux/auth/authSelectors';
+// import { selectIsLoggedIn, selectToken } from 'redux/auth/authSelectors';
+import s from './Login.module.css';
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isLoggedIn = useSelector(selectIsLoggedIn);
+  // const isLoggedIn = useSelector(selectIsLoggedIn);
   // const token = useSelector(selectToken);
-
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -19,18 +19,26 @@ const Login = () => {
       }),
       e.currentTarget.reset()
     );
-    isLoggedIn && navigate('/contacts', { replace: true })
+    navigate('/contacts', { replace: true });
   };
 
   return (
-    <div>
-      <form action="" onSubmit={handleSubmit}>
-        <input id="email" name="email" type="email" />
-        <input id="password" name="password" type="password" />
+    <div className={s.box}>
+      <form action="" onSubmit={handleSubmit} className={s.form}>
+        <input className={s.input} placeholder='email' id="email" name="email" type="email" />
+        <input
+          className={s.input}
+          id="password"
+          name="password"
+          type="password"
+          placeholder='password'
+        />
         <Link to="/" className="d-block my-4">
           Dont have account?
         </Link>
-        <button type="submit">Submit</button>
+        <button type="submit" className={s.button}>
+          Submit
+        </button>
       </form>
     </div>
   );

@@ -1,11 +1,13 @@
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { register } from 'redux/auth/authOperation';
+import s from './Register.module.css'
 
-const initialState = {
-  email: '',
-  name: '',
-  password: '',
-};
+// const initialState = {
+//   email: '',
+//   name: '',
+//   password: '',
+// };
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -24,19 +26,38 @@ const Register = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input id="name" name="name" type="name" placeholder="name" />
+    <div className={s.box}>
+      <form onSubmit={handleSubmit} className={s.form}>
+        <input 
+        className={s.input}
+        id="name" 
+        name="name" 
+        type="name" 
+        placeholder="name" 
+        />
 
-        <input id="email" name="email" type="email" placeholder="email" />
+        <input 
+        className={s.input}
+        id="email" 
+        name="email" 
+        type="email" 
+        placeholder="email" 
+        />
+
         <input
+        className={s.input}
           id="password"
           name="password"
           type="password"
           placeholder="password"
         />
 
-        <button type="submit">Submit</button>
+        <button 
+        className={s.button}
+        type="submit" >Submit</button>
+        <Link to="/login" className={s.input}>
+          I already have an account
+        </Link>
       </form>
     </div>
   );

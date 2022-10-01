@@ -8,7 +8,6 @@ import { deleteContact, fetchContacts } from 'redux/operations';
 import { getContacts, getFilter } from 'redux/selectors';
 
 import { RotatingLines } from 'react-loader-spinner';
-import UserMenu from 'components/UserMenu';
 import { selectIsLoggedIn, selectToken } from 'redux/auth/authSelectors';
 
 function ContactList() {

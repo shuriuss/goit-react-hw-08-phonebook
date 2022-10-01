@@ -1,14 +1,11 @@
-import { useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { logIn } from 'redux/auth/authOperation';
-// import { selectIsLoggedIn, selectToken } from 'redux/auth/authSelectors';
 import s from './Login.module.css';
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const isLoggedIn = useSelector(selectIsLoggedIn);
-  // const token = useSelector(selectToken);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -25,13 +22,21 @@ const Login = () => {
   return (
     <div className={s.box}>
       <form action="" onSubmit={handleSubmit} className={s.form}>
-        <input className={s.input} placeholder='email' id="email" name="email" type="email" />
         <input
           className={s.input}
+          placeholder="email"
+          id="email"
+          name="email"
+          type="email"
+          autoComplete="on"
+        />
+        <input
+          className={s.input}
+          autoComplete="off"
           id="password"
           name="password"
           type="password"
-          placeholder='password'
+          placeholder="password"
         />
         <Link to="/" className="d-block my-4">
           Dont have account?

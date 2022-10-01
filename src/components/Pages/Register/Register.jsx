@@ -34,6 +34,7 @@ const Register = () => {
         name="name" 
         type="name" 
         placeholder="name" 
+        autoComplete="off"
         />
 
         <input 
@@ -42,6 +43,7 @@ const Register = () => {
         name="email" 
         type="email" 
         placeholder="email" 
+        autoComplete="off"
         />
 
         <input
@@ -50,6 +52,7 @@ const Register = () => {
           name="password"
           type="password"
           placeholder="password"
+          autoComplete="off"
         />
 
         <button 

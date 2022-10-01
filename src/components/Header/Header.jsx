@@ -9,9 +9,6 @@ const Header = () => {
     !isLoggedIn && (
       <header className={s.header}>
         <Navigations />
-        {/* <Link></Link> */}
-        {/* {!isLoggedIn && <Register />}
-      {!isLoggedIn && <Login />} */}
       </header>
     )
   );
